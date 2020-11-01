@@ -1,0 +1,66 @@
+<html>
+<head>
+    <title>Login Form Design</title>
+    <link rel="stylesheet" type="text/css" href="admin_login.css">
+    <style>
+        .loginbox input[type="button"]
+        {
+            border: none;
+            outline: none;
+            height: 40px;
+            background: #fb2525;
+            color: #fff;
+            font-size: 18px;
+            border-radius:20px;
+        }
+
+        .loginbox input[type="button"]:hover
+        {
+            cursor: pointer;
+            background: #ffc107;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+<div class="loginbox">
+    <img src="images/default-profile.jpg" class="pnn">
+    <h1>Login Here</h1>
+    <form method="post">
+        <p>Username</p>
+        <input type="text" name="" id="name" placeholder="Enter Username">
+        <p>Password</p>
+        <input type="password" id="pwd" name="" placeholder="Enter Password">
+        <input type="button"  id="login" name="" value="Login">
+    </form>
+</div>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#login').bind('click',function () {
+            var name=$('#name').val();
+            var pwd=$('#pwd').val();
+            if (name==""||pwd=="")
+                alert('Invalid username or password');
+            else {
+                $.ajax({
+                    url:"admin_login.php",
+                    method:"post",
+                    data:{
+                        'name':name,
+                        'pwd':pwd,
+                    },
+                    success:function (response) {
+                        if (response=='1'){
+                            document.location.href="admin_items.php";
+                        }
+                        else
+                            alert('Invalid username or password');
+                    }
+                })
+            }
+        })
+    })
+</script>
+</body>
+</html>
